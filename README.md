@@ -1,14 +1,14 @@
 # Boolean satisfiability problems and their applications
 
-### Description:
+### 📝 Description:
 A course for 1st year Master's students of the Faculty of Computational Mathematics and Cybernetics of Lomonosov Moscow State University.
 
-### Links:
+### 🖇 Links:
 * 🎥 [Video lectures](https://disk.yandex.ru/d/2O9UqG2zds1T6w)
 * 🔗 [Course GitHub by Roman Kholin](https://github.com/RomanKholin94/Boolean-satisfiability-problem-and-application) 
 * 👨🏼‍🏫 Lecturer: [Roman Kholin](https://istina.msu.ru/profile/romankholin94/)
 
-### Lecture topics:
+### 📚 Lecture topics:
 1. [Intro to course. SAT and UNSAT](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/blob/main/lecture_presentations/lection01.pdf)
 2. [Representation of the problem for solvers.](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/blob/main/lecture_presentations/lection02.pdf)
 3. [Representation of the problem for solvers. Intro to SMT.](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/blob/main/lecture_presentations/lection03.pdf)
@@ -23,9 +23,13 @@ A course for 1st year Master's students of the Faculty of Computational Mathemat
 12. [Program analysis.](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/blob/main/lecture_presentations/lection12.pdf)
 13. [Application in biology.](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/blob/main/lecture_presentations/lection13.pdf)
 
-### Homework assignments:
+### 🏡 Homework assignments:
 1. [Homework 1. CNF, AtMostTwo, SAT-solver](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/tree/main/hw1)
 2. [Homework 2. colorA, colorB, DIMACS, n-Sudoku, SMT-solver](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/tree/main/hw2)
 3. [Homework 3. Engine for symbolic execution of C-code](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/tree/main/hw3)
+
+### Examination test:
+* [List of questions](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/blob/main/exam/exam_questions.pdf)
+* [Answers to questions](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/blob/main/exam/exam_answers.pdf)
 
 ![](lection_image.png)
