@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sh ../run_analyz $1 testme -i 4
+
+sh ../run_analyz $1 qsort -i 121
+
+sh ../run_analyz $1 mem -i 3
+
+sh ../run_analyz $1 solve -i 5
+
+sh ../run_analyz $1 var_num_inputs -i 6

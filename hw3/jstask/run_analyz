@@ -1,0 +1,37 @@
+#!/bin/bash
+
+
+YOURPGM=$1
+PRGMEXE=$2
+iter=$4
+prgm=${PRGMEXE/%.js/}
+dir=$(pwd)/`dirname $0`
+
+rm -f input
+rm -f trace
+rm -rf $prgm
+
+mkdir $prgm
+mkdir $prgm/traces
+
+i=1
+echo "-------------------------------------------------$prgm-------------------------------------------------"
+#echo $dir
+
+while [ $i -le $iter ]
+do
+	echo "[Iteration $i] $prgm"
+
+	if node $dir/node_modules/jalangi2/src/js/commands/jalangi.js --inlineIID --inlineSource --analysis $dir/tracer.js $prgm; cp trace $prgm/traces/$i; /Users/sait/.pyenv/shims/python3 $YOURPGM > /dev/null
+	then
+		echo ""
+	else
+	  echo ".................................................$prgm................................................."
+	  echo ""
+	  echo ""
+		exit
+	fi
+i=$((i+1))
+done
+
+

@@ -1,0 +1,457 @@
+\documentclass[12pt]{extreport}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+\usepackage[linesnumbered]{algorithm2e}   
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\theoremstyle{definiton}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\varnothing
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\om\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% Enumerations %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Rnum}[1]{\expandafter{\romannumeral #1\relax}}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+%%%%%%%%%%%%%%%%%%%%% EOF Enumerations %%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xparse}
+\usepackage{ifthen}
+\usepackage{bm} %%% bf in math mode
+\usepackage{color}
+%\usepackage[usenames,dvipsnames]{xcolor}
+
+\definecolor{Gray555}{HTML}{555555}
+\definecolor{Gray444}{HTML}{444444}
+\definecolor{Gray333}{HTML}{333333}
+
+
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\newcounter{prvar}
+
+\def\beforPRskip{
+	\bigskip
+	%\vspace*{2ex}
+}
+
+\def\PRSUBskip{
+	\medskip
+}
+
+
+\def\pr{\beforPRskip\noindent\stepcounter{problem}{\bf \theproblem .\;}\setcounter{subproblem}{0}}
+\def\pru{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^\circ$\!\!.\;}\setcounter{subproblem}{0}}
+\def\prstar{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^*$\negthickspace.}\setcounter{subproblem}{0}\;}
+\def\prpfrom[#1]{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem~(№#1 из задания).  }\setcounter{subproblem}{0} }
+\def\prp{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+
+\def\prpvar{\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem \;$\langle${\rm\Rnum{\theprvar}}$\rangle$.}\setcounter{subproblem}{0}\;}
+\def\prpv{\beforPRskip\noindent\stepcounter{prvar}{\bf Задача \theproblem \,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$.  }\setcounter{subproblem}{0} }
+\def\prv{\beforPRskip\noindent\stepcounter{prvar}{\bf \theproblem\,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}.\setcounter{subproblem}{0} }
+
+\def\prpstar{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\bf\theproblem^*$\negthickspace.  }\setcounter{subproblem}{0} }
+\def\prdag{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^{^\dagger}$\negthickspace\,.  }\setcounter{subproblem}{0} }
+\def\upr{\beforPRskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem.}\setcounter{subproblem}{0}\;}
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\PRSUBskip\noindent\stepcounter{subproblem}{\sf \thesubproblem.}\;}
+\def\prsubr{\PRSUBskip\noindent\stepcounter{subproblem}{\bf \asbuk{subproblem})}\;}
+\def\prsubstar{\PRSUBskip\noindent\stepcounter{subproblem}{\rm $\thesubproblem^*$\negthickspace.}\;}
+\def\prsubrstar{\PRSUBskip\noindent\stepcounter{subproblem}{$\text{\bf \asbuk{subproblem}}^*\mathbf{)}$}\;}
+
+\newcommand{\bracketspace}[1]{\phantom{(}\!\!{#1}\!\!\phantom{)}}
+
+\DeclareDocumentCommand{\Prpvar}{ O{null} O{} }{
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem
+% 	\ifthenelse{\equal{#1}{null}}{  }{ {\sf $\bm\langle$\bracketspace{#1}$\bm\rangle$}}
+%	~\!\!(\bracketspace{{\rm\Rnum{\theprvar}}}).  }\setcounter{subproblem}{0}
+%	\;(\bracketspace{{\rm\Rnum{\theprvar}}})}\setcounter{subproblem}{0}
+%
+	\,{\sf $\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}}.
+
+}
+%\DeclareDocumentCommand{\Prpvar}{ O{level} O{meta} m }{\prpvar}
+
+
+\DeclareDocumentCommand{\Prp}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача \theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+\DeclareDocumentCommand{\Pr}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf\theproblem
+	~\!\! \ifthenelse{\equal{#1}{null}}{\!\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+	
+	\DeclareDocumentCommand{\Prstar}{ O{null} O{null} }{\setcounter{subproblem}{0}
+			\medskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf$\mathbf{\theproblem^*}$
+			~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+			 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+	
+
+%\DeclareDocumentCommand{\Prp}{ O{level} O{meta} }
+
+\DeclareDocumentCommand{\Prps}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^* $
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+\DeclareDocumentCommand{\Prpd}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^\dagger$
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+
+\def\prend{
+	\bigskip
+%	\bigskip
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EOF Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\usepackage{erewhon}
+%\usepackage{heuristica}
+%\usepackage{gentium}
+
+\usepackage[portrait, top=3cm, bottom=1.5cm, left=3cm, right=2cm]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+% \renewcommand{\headrulewidth}{0pt}
+\lhead{\fontfamily{fca}\selectfont {\color{myblue}\bf{Шарипов Саит}} }
+\rhead{\fontfamily{fca}\selectfont {Задачи разрешимости логических формул и приложения\ \ \ \  ДЗ№1} }
+% \rhead{\fontfamily{fca}\selectfont ДЗ№1}
+%\lhead{ \bf  {ТРЯП. } Семинар 1 }
+%\chead{\fontfamily{fca}\selectfont {Вариант 1}}
+%\rhead{\small 01.09.2016}
+\cfoot{}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\Large\bfseries\filcenter {\setcounter{problem}{0}}  }{}{1em}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Обозначения и операции %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+                                                                    
+\newcommand{\divisible}{\mathop{\raisebox{-2pt}{\vdots}}}           
+\let\Om\Omega
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shen Macroses %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\w}[1]{{\hbox{\texttt{#1}}}}
+\usepackage{wrapfig}
+\def\bin{\mathrm{bin}}
+
+% МОЙ КОД НАЧАЛО
+\definecolor{myblue}{RGB}{0, 0, 102}
+\definecolor{myyellow}{RGB}{252, 245, 174}
+
+\newcommand{\solution}[2][\color{myblue}Решение]{
+\medskip
+	\noindent{\bfseries #1 }{{\color{myblue}\bfseries #2:}}
+%\medskip	
+}
+
+\newenvironment{blockquote}{%
+  \par%
+  \medskip
+  \leftskip=1em%
+  \noindent}{%
+  \par\medskip}
+  
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset { %
+    language=C++,
+    belowcaptionskip=1\baselineskip,
+    breaklines=true,
+    frame=L,
+    xleftmargin=\parindent,
+    language=C,
+    showstringspaces=false,
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\bfseries\color{purple!40!black},
+    commentstyle=\itshape\color{green!40!black},
+    identifierstyle=\color{blue},
+    stringstyle=\color{orange},
+    backgroundcolor=\color{black!5}, % set backgroundcolor
+    basewidth=0.5em,
+    numbers=left,
+}
+% МОЙ КОД КОНЕЦ
+
+
+
+\begin{document}	
+\SetKwFunction{BuildMaxHeap}{Build\_Max\_Heap} 
+\SetKwFunction{TreeSuccessor}{Tree\_Successor} 
+\SetKwFunction{ExtMax}{Extract\_Max} 
+\SetKwFunction{MaxHeapify}{Max\_Heapify}
+
+\SetKwInOut{Input}{Вход}\SetKwInOut{Output}{Выход}
+\SetKwProg{Fn}{Function}{ :}{end}
+\SetKwFunction{F}{F}
+\SetKwFunction{KWsize}{size}
+\SetKwFunction{HeapSize}{heap\_size}
+\SetKwFunction{KwPrint}{print} 
+\SetKwFunction{swap}{swap}
+			
+\Pr[10 баллов] Даны булевы переменные $x_1, \dots, x_5$. Постройте две разные булевы формулы в форме КНФ, которые выражают следующую формулу: $x_1 + \dots + x_5 \leq 2$. Первая должна содержать только переменные $x_1, \dots, x_5$, вторая -- дополнительные переменные.
+			
+	\solution{1}
+	\begin{blockquote}
+	{\color{myblue}
+	\noindent \textbf{1.} В первой формуле нужно реализовать $AtMostTwo$.\\
+	Общая формула для $AtMostK$ выглядит так:\\
+	$${\bigwedge\limits_{\substack{1 \leq i_1, \dots, i_{k+1} \leq n \\
+	i_h \neq i_m}} (\overline{x_{i_1}} \vee \overline{x_{i_2}} \vee \ldots \vee \overline{x_{i_{k+1}}})}$$
+	Тогда формула $\phi_1 = AtMostTwo$ для $x_1, \dots, x_5$ будет выглядеть так:
+	$$\phi_1 = AtMostTwo = {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}} (\overline{x_{i}} \vee \overline{x_{j}} \vee \overline{x_{k}})}$$
+	\\
+	\noindent \textbf{2.} Введем дополнительные переменные и получим формулу $\phi_2$, т.ч. она будет равновыполнима формуле $\phi_1$.
+	$$\phi_2 = AtMostTwo(x_1, x_2, x_3, z_1, z_2) \wedge AtMostTwo(\overline{z_1}, \overline{z_2}, x_4, x_5)$$
+	Тут есть $AtMostTwo$ от четырех переменных -- она строится аналогично как и от пяти переменных.\\
+	Заметим, что если формула $\phi_2$ истина, то и формула $\phi_1$ истина (равносильно тому, что $\phi_1 = 0 \Rightarrow \phi_2 = 0$):
+	\begin{itemize}
+	    \item Если $z_1 = 0, z_2 = 0$, то $x_1 + x_2 + x_3 \leq 2$ и $x_4 + x_5 = 0 \Rightarrow x_1 + x_2 + x_3 + x_4 + x_5 \leq 2$;
+	    \item Если $z_1 = 0, z_2 = 1$, то $x_1 + x_2 + x_3 \leq 1$ и $x_4 + x_5 \leq 1 \Rightarrow x_1 + x_2 + x_3 + x_4 + x_5 \leq 2$;
+	    \item Если $z_1 = 1, z_2 = 0$, то $x_1 + x_2 + x_3 \leq 1$ и $x_4 + x_5 \leq 1 \Rightarrow x_1 + x_2 + x_3 + x_4 + x_5 \leq 2$;
+	    \item Если $z_1 = 1, z_2 = 1$, то $x_1 + x_2 + x_3 = 0$ и $x_4 + x_5 \leq 2 \Rightarrow x_1 + x_2 + x_3 + x_4 + x_5 \leq 2$;
+	\end{itemize}
+	При этом также, если формула $\phi_1$ истина, то и формула $\phi_2$ истина при некоторых $z_1$, $z_2$. Обозначим $s_1 = x_1 + x_2 + x_3$, $s_2 = x_4 + x_5$. В условиях истинности формулы $\phi_1$ -- $s_1 + s_2 \leq 2$ и возможны следующие варианты:
+	\begin{itemize}
+	    \item Если $s_1 = 0$, то при любом $s_2 \in \{0, 1, 2\}$, при $z_1 = 1, z_2 = 1 \Rightarrow \phi_2$ истина;
+	    \item Если $s_2 = 0$, то при любом $s_1 \in \{0, 1, 2\}$, при $z_1 = 0, z_2 = 0 \Rightarrow \phi_2$ истина;
+	    \item Если $s_1 = 1$ и $s_2 = 1$, то при $z_1 = 0, z_2 = 1 \Rightarrow \phi_2$ истина;
+	\end{itemize}
+	Таким образом мы показали, что формулы действительно равновыполнимы.
+	}
+	\end{blockquote}
+
+\Pr[10 баллов] Обозначим первую формулу как $AtMostTwoA$, вторую -- $AtMostTwoB$. Представьте в виде КНФ формулы\\$y_1 \leftrightarrow AtMostTwoA(x_1, \dots, x_5)$, $y_2 \leftrightarrow AtMostTwoB(x_1, \dots, x_5)$.
+
+    \solution{2}
+    \begin{blockquote}
+    {\color{myblue}
+    \noindent \textbf{1. КНФ для формулы $y_1 \leftrightarrow AtMostTwoA(x_1, \dots, x_5)$.}\\
+    $$x \leftrightarrow y \Leftrightarrow (x \vee \overline{y}) \wedge (\overline{x} \vee y)$$
+    Следовательно:\\
+    $$y_1 \leftrightarrow AtMostTwoA(x_1, \dots, x_5)$$
+    $$(y_1 \vee \overline{AtMostTwoA(x_1, \dots, x_5)}) \wedge (\overline{y_1} \vee AtMostTwoA(x_1, \dots, x_5))$$
+    $$(y_1 \vee {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}} (x_{i} \vee x_{j} \vee x_{k}})) \wedge (\overline{y_1} \vee {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}} (\overline{x_{i}} \vee \overline{x_{j}} \vee \overline{x_{k}})})$$
+	$$CNF = \big({\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}} (x_{i} \vee x_{j} \vee x_{k} \vee y_1)}\big)  \wedge \big({\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}} (\overline{x_{i}} \vee \overline{x_{j}} \vee \overline{x_{k} } \vee \overline{y_1})}\big)$$
+	В файле {\fcolorbox{red}{myyellow}{task2\_AtMostTwoA.py}} находится программа, которая построчно печатает все дизьюнкты КНФ данной формулы.\\
+	\\
+    \textbf{2. КНФ для формулы $y_2 \leftrightarrow AtMostTwoB(x_1, \dots, x_5)$.}\\
+    Для краткости обозначим $f$ как $AtMostTwo$:\\
+    $$y_2 \leftrightarrow AtMostTwoB(x_1, \dots, x_5)$$
+    $$y_2 \leftrightarrow \big(f(x_1, x_2, x_3, z_1, z_2) \wedge f(\overline{z_1}, \overline{z_2}, x_4, x_5)\big)$$
+    $$(y_2 \vee \overline{f(x_1, x_2, x_3, z_1, z_2)} \vee \overline{f(\overline{z_1}, \overline{z_2}, x_4, x_5)}) \wedge (\overline{y_2} \vee \big(f(x_1, x_2, x_3, z_1, z_2) \wedge f(\overline{z_1}, \overline{z_2}, x_4, x_5)\big))$$
+    Для удобства обозначим через $h_1 = x_1, h_2 = x_2, h_3 = x_3, h_4 = z_1, h_5 = z_2$ и $g_1 = \overline{z_1}, g_2 = \overline{z_2}, g_3 = x_3, g_4 = x_4$.\\
+    $$y_2 \vee \overline{f(x_1, x_2, x_3, z_1, z_2)} \vee \overline{f(\overline{z_1}, \overline{z_2}, x_4, x_5)} = y_2 \vee {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}} (h_i \vee h_j \vee h_k)} \vee {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 4 \\
+	i \neq j \neq k}} (g_i \vee g_j \vee g_k)} = $$
+	$$= {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}}} \ {\bigwedge\limits_{\substack{1 \leq n, l, m \leq 5 \\ n \neq l \neq m}}} (y_2 \vee h_i \vee h_j \vee h_k \vee g_n \vee g_l \vee g_m)$$
+	$$\overline{y_2} \vee \big(f(x_1, x_2, x_3, z_1, z_2) \wedge f(\overline{z_1}, \overline{z_2}, x_4, x_5)\big) = \overline{y_2} \vee \big({\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}} (\overline{h_{i}} \vee \overline{h_{j}} \vee \overline{h_{k}})} \wedge {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 4 \\
+	i \neq j \neq k}} (\overline{g_{i}} \vee \overline{g_{j}} \vee \overline{g_{k}})}\big) =$$
+	$$= {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}} (\overline{h_{i}} \vee \overline{h_{j}} \vee \overline{h_{k}} \vee \overline{y_2})} \wedge {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 4 \\
+	i \neq j \neq k}} (\overline{g_{i}} \vee \overline{g_{j}} \vee \overline{g_{k}}  \vee \overline{y_2})}$$
+	Таким образом:\\
+	$$CNF = {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}}} \ {\bigwedge\limits_{\substack{1 \leq n, l, m \leq 5 \\ n \neq l \neq m}}} (y_2 \vee h_i \vee h_j \vee h_k \vee g_n \vee g_l \vee g_m) \wedge$$
+	$$\wedge \big({\bigwedge\limits_{\substack{1 \leq i, j, k \leq 5 \\
+	i \neq j \neq k}} (\overline{h_{i}} \vee \overline{h_{j}} \vee \overline{h_{k}} \vee \overline{y_2})} \wedge {\bigwedge\limits_{\substack{1 \leq i, j, k \leq 4 \\
+	i \neq j \neq k}} (\overline{g_{i}} \vee \overline{g_{j}} \vee \overline{g_{k}}  \vee \overline{y_2})}\big)$$
+	Так это делается теоретически, однако довольно просто можно найти совершенную КНФ по самой формуле. Минус такого подхода в том, что число дизъюнктов может быть больше, чем в теоретическом подходе. В качестве разнообразия в программе будем использовать СКНФ данной формулы.\\
+	В файле {\fcolorbox{red}{myyellow}{task2\_AtMostTwoB.py}} находится программа, которая построчно печатает все дизьюнкты СКНФ данной формулы.\\
+    }
+    \end{blockquote}
+
+\Pr[5 баллов] Напишите формулу, выражающую следующее утверждение: \textit{"существует оценка $x_1, \dots, x_5$, такая, что не выполняется $y_1$ и выполняется $y_2$"}, используя $y_1 \leftrightarrow AtMostTwoA(x_1, \dots, x_5)$ и $y_2 \leftrightarrow AtMostTwoB(x_1, \dots, x_5)$.
+
+    \solution{3}
+    \begin{blockquote}
+    {\color{myblue}
+    \noindent Тут подход похож (а может быть это он и есть) на \textit{преобразование Цейтина}.\\
+    \\
+    $T_1 \leftrightarrow \overline{y_1} \wedge y_2$\\
+    $y_1 \leftrightarrow AtMostTwoA(x_1, \dots, x_5)$\\
+    $y_2 \leftrightarrow AtMostTwoB(x_1, \dots, x_5)$\\
+    \\
+    Пусть $F_1$ -- КНФ формулы $y_1 \leftrightarrow AtMostTwoA(x_1, \dots, x_5)$,\\
+    $F_2$ -- КНФ формулы $y_2 \leftrightarrow AtMostTwoB(x_1, \dots, x_5)$.\\
+    \\
+    Тогда формула, выражающая утверждение есть:
+    $T_1 \wedge F_1 \wedge F_2 = \overline{y_1} \wedge y_2 \wedge F_1 \wedge F_2$.\\
+    Осталось заметить, что КНФ $F_1$ и $F_2$ были построены в предыдущем номере.\\
+    \\
+    \textbf{Ответ:} $\overline{y_1} \wedge y_2 \wedge F_1 \wedge F_2$.
+    }
+    \end{blockquote}
+
+\Pr[5 баллов] Проверьте получившуюся формулу на SAT-решателе и предоставьте результат вычисления.
+
+    \solution{4}
+    \begin{blockquote}
+    {\color{myblue}
+    \noindent Прежде, чем программировать, подумаем, может ли быть выполнима формула, которая выражает утверждение \textit{"существует оценка $x_1, \dots, x_5$, такая, что не выполняется $y_1$ и выполняется $y_2$"}? Хммм, в $1$-ом номере мы проверяли, что, если истина формула $\phi_2$, то будет верна и формула $\phi_1$. Поэтому небольшой спойлер: SAT-решатель выдаст вердикт, что формула UNSAT (\textit{unsatisfiable}).\\
+    \\
+    Что же, все действительно так. При запуске программы {\fcolorbox{red}{myyellow}{task4.py}} выводится слово \textbf{\textit{"UNSAT"}}.
+    }
+    \end{blockquote}
+
+\Pr[10 баллов] Рассмотрим квадратную таблицу $10 \times 10$ и все возможные прямоугольники внутри сетки, длина и ширина которых не менее $2$. Напишите следующую формулу: \textit{"существует ли раскраска сетки с использованием трех цветов, чтобы ни один такой прямоугольник не имел одинакового цвета в своих четырех углах"}.
+
+    \solution{5}
+    \begin{blockquote}
+    {\color{myblue}
+    \noindent Введем следующие обозначения:\\
+    $x_{ij1}$ -- истина тогда и только тогда, когда клетка $i \times j$ раскрашена в цвет $1$.\\
+    $x_{ij2}$ -- истина тогда и только тогда, когда клетка $i \times j$ раскрашена в цвет $2$.\\
+    $x_{ij3}$ -- истина тогда и только тогда, когда клетка $i \times j$ раскрашена в цвет $3$.\\
+    Таким образом у нас всего $10 \cdot 10 \cdot 3 = 300$ переменных.\\
+    Нужно проследить за тем, чтобы каждая клетка была раскрашена ровно в один из трех цветов. Это делает следующая формула:
+    $$\bigwedge\limits_{\substack{1 \leq i, j \leq 10}} \Big((x_{ij1} \vee x_{ij2} \vee x_{ij3}) \wedge AtMostOne(x_{ij1}, x_{ij2}, x_{ij3})\Big)= \bigwedge\limits_{\substack{1 \leq i, j \leq 10}} \Big((x_{ij1} \vee x_{ij2} \vee x_{ij3}) \wedge \bigwedge\limits_{\substack{1 \leq k, l \leq 3 \\ k \neq l}} (\overline{x_{ijk}} \vee \overline{x_{ijl}}) \Big)$$
+    Теперь таблица раскрашена правильно. Далее надо обеспечить, чтобы углы ни одного из прямоугольников с длиной и шириной $\geq 2$ не имел бы $4$-х углов одного и того же цвета.
+    Обозначим углы какого-либо прямоугольника следующим образом:
+    \begin{center}
+    \begin{tikzpicture}[scale=0.2]
+    \tikzstyle{every node}+=[inner sep=0pt]
+    \draw [black] (32.1,-12.2) circle (3);
+    \draw (32.1,-12.2) node {$a_1,b_2$};
+    \draw [black] (18.5,-25.1) circle (3);
+    \draw (18.5,-25.1) node {$a_2,b_1$};
+    \draw [black] (32.1,-25.1) circle (3);
+    \draw (32.1,-25.1) node {$a_2,b_2$};
+    \draw [black] (18.5,-12.2) circle (3);
+    \draw (18.5,-12.2) node {$a_1,b_1$};
+    \draw [black] (21.5,-12.2) -- (29.1,-12.2);
+    \fill [black] (29.1,-12.2) -- (28.3,-11.7) -- (28.3,-12.7);
+    \draw [black] (32.1,-15.2) -- (32.1,-22.1);
+    \fill [black] (32.1,-22.1) -- (32.6,-21.3) -- (31.6,-21.3);
+    \draw [black] (29.1,-25.1) -- (21.5,-25.1);
+    \fill [black] (21.5,-25.1) -- (22.3,-25.6) -- (22.3,-24.6);
+    \draw [black] (18.5,-21.9) -- (18.5,-15.2);
+    \fill [black] (18.5,-15.2) -- (18,-16) -- (19,-16);
+    \end{tikzpicture}
+    \end{center}
+    Следующая формула обеспечивает то, что его углы не будут одного цвета:
+    $$\overline{\bigvee\limits_{\substack{1 \leq k \leq 3}}x_{a_1b_1k} \wedge x_{a_1b_2k} \wedge x_{a_2b_1k} \wedge x_{a_2b_2k}} = \bigwedge\limits_{\substack{1 \leq k \leq 3}}\overline{x_{a_1b_1k}} \vee \overline{x_{a_1b_2k}} \vee \overline{x_{a_2b_1k}} \vee \overline{x_{a_2b_2k}}$$
+    Распространим это требование ко всем прямоугольникам в таблице:
+    $$\bigwedge\limits_{\substack{1 \leq a_1, b_1, a_2, b_2 \leq 10\\a_2 - a_1 \geq 2 \\b_2 - b_1 \geq 2}}\Big(\bigwedge\limits_{\substack{1 \leq k \leq 3}}\overline{x_{a_1b_1k}} \vee \overline{x_{a_1b_2k}} \vee \overline{x_{a_2b_1k}} \vee \overline{x_{a_2b_2k}}\Big)$$
+    Осталось собрать вместе все наши требования:
+    $$\Bigg(\bigwedge\limits_{\substack{1 \leq i, j \leq 10}} \Big((x_{ij1} \vee x_{ij2} \vee x_{ij3}) \wedge \bigwedge\limits_{\substack{1 \leq k, l \leq 3 \\ k \neq l}} (\overline{x_{ijk}} \vee \overline{x_{ijl}}) \Big)\Bigg) \wedge \Bigg(\bigwedge\limits_{\substack{1 \leq a_1, b_1, a_2, b_2 \leq 10\\a_2 - a_1 \geq 2 \\b_2 - b_1 \geq 2}}\Big(\bigwedge\limits_{\substack{1 \leq k \leq 3}}\overline{x_{a_1b_1k}} \vee \overline{x_{a_1b_2k}} \vee \overline{x_{a_2b_1k}} \vee \overline{x_{a_2b_2k}}\Big)\Bigg)$$
+
+    }
+    \end{blockquote}
+
+\Pr[10 баллов] Решите формулу на SAT-решателе и по результату решателя (если формула разрешима) постройте нужную таблицу.
+
+    \solution{6}
+    \begin{blockquote}
+    {\color{myblue}
+    \noindent Формула разрешима! Запуск программы {\fcolorbox{red}{myyellow}{task6.py}} выводит требуемую таблицу.
+    }
+    \end{blockquote}
+			
+			
+\end{document}
+  
