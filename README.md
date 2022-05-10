@@ -1,12 +1,11 @@
 # Boolean satisfiability problems and their applications
-***
 
 ### Description:
 A course for 1st year Master's students of the Faculty of Computational Mathematics and Cybernetics of Lomonosov Moscow State University.
 
 ### Links:
 * 🎥 [Video lectures](https://disk.yandex.ru/d/2O9UqG2zds1T6w)
-* 🔗 [Course GitHub](https://github.com/RomanKholin94/Boolean-satisfiability-problem-and-application) 
+* 🔗 [Course GitHub by Roman Kholin](https://github.com/RomanKholin94/Boolean-satisfiability-problem-and-application) 
 * 👨🏼‍🏫 Lecturer: [Roman Kholin](https://istina.msu.ru/profile/romankholin94/)
 
 ### Lecture topics:
