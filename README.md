@@ -28,7 +28,7 @@ A course for 1st year Master's students of the Faculty of Computational Mathemat
 2. [Homework 2. colorA, colorB, DIMACS, n-Sudoku, SMT-solver](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/tree/main/hw2)
 3. [Homework 3. Engine for symbolic execution of C-code](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/tree/main/hw3)
 
-### Examination test:
+### 🙀 Examination test:
 * [List of questions](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/blob/main/exam/exam_questions.pdf)
 * [Answers to questions](https://github.com/Sharrish/boolean_satisfiability_problem_and_application/blob/main/exam/exam_answers.pdf)
 
